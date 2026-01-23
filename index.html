@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Empresa | Soluciones</title>
+  <meta name="description" content="Breve descripción de tu empresa y lo que ofrece." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="header">
+    <nav class="nav container">
+      <a class="logo" href="#inicio">VT SOLUTIONS</a>
+      <button class="nav__toggle" aria-label="Abrir menú">☰</button>
+      <ul class="nav__links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="container hero__content">
+        <h1>Ayudamos a tu negocio a crecer</h1>
+        <p>Una frase clara sobre tu propuesta de valor.</p>
+        <a class="btn" href="#contacto">Cotizar</a>
+      </div>
+    </section>
+
+    <section id="servicios" class="section">
+      <div class="container">
+        <h2>Servicios</h2>
+        <div class="grid">
+          <article class="card">Servicio 1</article>
+          <article class="card">Servicio 2</article>
+          <article class="card">Servicio 3</article>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" class="section">
+      <div class="container">
+        <h2>¿Por qué elegirnos?</h2>
+        <ul class="list">
+          <li>Beneficio 1</li>
+          <li>Beneficio 2</li>
+          <li>Beneficio 3</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contacto" class="section">
+      <div class="container">
+        <h2>Contacto</h2>
+        <form id="contactForm" class="form">
+          <input name="nombre" placeholder="Nombre" required />
+          <input name="correo" type="email" placeholder="Correo" required />
+          <textarea name="mensaje" placeholder="Mensaje" required></textarea>
+          <button class="btn" type="submit">Enviar</button>
+        </form>
+        <p class="muted">O escríbenos por WhatsApp: +506 XXXX-XXXX</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>© 2026 VT SOLUTIONS. Todos los derechos reservados.</small>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

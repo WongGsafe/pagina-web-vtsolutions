@@ -1,0 +1,14 @@
+:root{
+  --max: 1100px;
+  --p: 16px;
+}
+
+*{ box-sizing: border-box; }
+body{ margin:0; font-family: system-ui, Arial; line-height: 1.5; }
+.container{ width: min(100% - 2rem, var(--max)); margin: 0 auto; }
+
+.section{ padding: 64px 0; }
+.grid{ display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.card{ padding: 16px; border: 1px solid #ddd; border-radius: 12px; }
+
+.btn{ display:inline-block; padding: 12px 16px; border-radius: 10px; text-decoration:none; }
