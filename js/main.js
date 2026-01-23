@@ -1,6 +1,2 @@
-const toggle = document.querySelector(".nav__toggle");
-const links = document.querySelector(".nav__links");
-
-toggle?.addEventListener("click", () => {
-  links.classList.toggle("is-open");
-});
+// Placeholder para futuras interacciones
+console.log("VT Solutions landing page cargada correctamente");

@@ -1,74 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mi Empresa | Soluciones</title>
-  <meta name="description" content="Breve descripción de tu empresa y lo que ofrece." />
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VT Solutions | Desarrollo Web</title>
+  <meta name="description" content="VT Solutions - Equipo universitario de desarrolladores web creando soluciones digitales innovadoras.">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="header">
-    <nav class="nav container">
-      <a class="logo" href="#inicio">VT SOLUTIONS</a>
-      <button class="nav__toggle" aria-label="Abrir menú">☰</button>
-      <ul class="nav__links">
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#beneficios">Beneficios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
+    <div class="container nav">
+      <h2 class="logo">VT Solutions</h2>
+      <nav>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="inicio" class="hero">
-      <div class="container hero__content">
-        <h1>Ayudamos a tu negocio a crecer</h1>
-        <p>Una frase clara sobre tu propuesta de valor.</p>
-        <a class="btn" href="#contacto">Cotizar</a>
-      </div>
-    </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Soluciones digitales que impulsan ideas</h1>
+      <p>Somos un equipo universitario de desarrolladores web enfocados en crear soluciones innovadoras, accesibles y de alta calidad.</p>
+      <a href="#contacto" class="btn">Contáctanos</a>
+    </div>
+  </section>
 
-    <section id="servicios" class="section">
-      <div class="container">
-        <h2>Servicios</h2>
-        <div class="grid">
-          <article class="card">Servicio 1</article>
-          <article class="card">Servicio 2</article>
-          <article class="card">Servicio 3</article>
-        </div>
-      </div>
-    </section>
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="section">
+    <div class="container">
+      <h2>¿Quiénes somos?</h2>
+      <p>
+        <strong>VT Solutions</strong> es un equipo de desarrolladores web universitarios enfocados en aplicar buenas prácticas
+        de diseño y desarrollo colaborativo para crear soluciones digitales que aporten valor tanto en proyectos académicos
+        como en entornos reales.
+      </p>
+    </div>
+  </section>
 
-    <section id="beneficios" class="section">
-      <div class="container">
-        <h2>¿Por qué elegirnos?</h2>
-        <ul class="list">
-          <li>Beneficio 1</li>
-          <li>Beneficio 2</li>
-          <li>Beneficio 3</li>
-        </ul>
+  <!-- MISION Y VISION -->
+  <section class="section bg-light">
+    <div class="container grid">
+      <div class="card">
+        <h3>Misión</h3>
+        <p>
+          Impulsar el crecimiento de nuestros clientes mediante soluciones digitales innovadoras
+          que simplifican procesos complejos y optimizan la toma de decisiones.
+        </p>
       </div>
-    </section>
 
-    <section id="contacto" class="section">
-      <div class="container">
-        <h2>Contacto</h2>
-        <form id="contactForm" class="form">
-          <input name="nombre" placeholder="Nombre" required />
-          <input name="correo" type="email" placeholder="Correo" required />
-          <textarea name="mensaje" placeholder="Mensaje" required></textarea>
-          <button class="btn" type="submit">Enviar</button>
-        </form>
-        <p class="muted">O escríbenos por WhatsApp: +506 XXXX-XXXX</p>
+      <div class="card">
+        <h3>Visión</h3>
+        <p>
+          Ser un equipo de desarrolladores web universitarios reconocidos por crear soluciones
+          digitales innovadoras, accesibles y de alta calidad, aportando valor a proyectos
+          académicos y reales.
+        </p>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- EQUIPO -->
+  <section id="equipo" class="section">
+    <div class="container">
+      <h2>Nuestro equipo</h2>
+      <div class="grid team">
+        <div class="card">Esteban Corrales</div>
+        <div class="card">Emanuel Rai</div>
+        <div class="card">Rodrigo Fernando</div>
+        <div class="card">Luis Alejandro</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section bg-dark">
+    <div class="container">
+      <h2>Contacto</h2>
+      <form class="form">
+        <input type="text" placeholder="Nombre" required>
+        <input type="email" placeholder="Correo" required>
+        <textarea placeholder="Mensaje" required></textarea>
+        <button class="btn">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <small>© 2026 VT SOLUTIONS. Todos los derechos reservados.</small>
+      <p>© 2026 VT Solutions. Todos los derechos reservados.</p>
     </div>
   </footer>
 
