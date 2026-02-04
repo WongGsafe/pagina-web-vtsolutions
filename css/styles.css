@@ -1,6 +1,7 @@
 :root {
   --primary: #4f46e5;
   --dark: #111827;
+  --dark-alt: #1e293b; /* fondo de contacto más agradable */
   --light: #f9fafb;
 }
 
@@ -59,6 +60,8 @@ body {
 
 .logo {
   color: var(--primary);
+  font-weight: bold;
+  font-size: 1.8rem;
 }
 
 /* HERO */
@@ -88,15 +91,15 @@ body {
 }
 
 .bg-dark {
-  background: var(--dark);
+  background: var(--dark-alt); /* más agradable que negro puro */
   color: white;
 }
 
 .bg-dark input,
 .bg-dark textarea {
-  background: #1f2937;
+  background: #273449; /* contraste con el fondo */
   color: white;
-  border: 1px solid #374151;
+  border: 1px solid #4f46e5;
 }
 
 /* HEADINGS */
@@ -147,8 +150,8 @@ h2 {
 /* BUTTONS */
 .btn {
   display: inline-block;
-  background: white;
-  color: var(--primary);
+  background: var(--primary);
+  color: white;
   padding: 12px 24px;
   border-radius: 8px;
   text-decoration: none;
@@ -159,20 +162,8 @@ h2 {
 }
 
 .btn:hover {
-  background: #eef2ff;
+  background: #6366f1;
   transform: translateY(-2px);
-}
-
-/* BOTÓN OUTLINE (para hero secundario) */
-.btn-outline {
-  background: transparent;
-  color: white;
-  border: 2px solid white;
-}
-
-.btn-outline:hover {
-  background: white;
-  color: var(--primary);
 }
 
 /* FORM */
@@ -186,11 +177,11 @@ h2 {
 
 input,
 textarea {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 14px;
+  border-radius: 12px;
   border: 1px solid #d1d5db;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 textarea {
