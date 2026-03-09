@@ -30,7 +30,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* Estilos para la tarjeta de registro */
 .card {
     border: none;
     border-radius: 1rem !important;
@@ -47,7 +46,6 @@ body {
     padding: 2.5rem !important;
 }
 
-/* Estilos para los títulos */
 h5 {
     color: #1E293B;
     font-size: 1.75rem;
@@ -69,7 +67,6 @@ h5::after {
     border-radius: 2px;
 }
 
-/* Estilos para las etiquetas */
 .form-label {
     color: #1E293B;
     font-size: 0.95rem;
@@ -79,7 +76,6 @@ h5::after {
     text-align: left;
 }
 
-/* Estilos para los inputs */
 .form-control {
     border: 1.5px solid #E2E8F0;
     border-radius: 0.75rem;
@@ -101,7 +97,6 @@ h5::after {
     outline: none;
 }
 
-/* Estados de validación */
 .is-invalid {
     border-color: #DC2626 !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23DC2626'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23DC2626' stroke='none'/%3e%3c/svg%3e");
@@ -137,7 +132,6 @@ h5::after {
     box-shadow: 0 0 0 0.25rem rgba(5, 150, 105, 0.15) !important;
 }
 
-/* Contenedor de errores - MEJORADO */
 #errorContainer {
     transition: all 0.3s ease;
     margin-bottom: 1.5rem;
@@ -148,7 +142,7 @@ h5::after {
     padding: 1rem 1.25rem;
     border: 1px solid #FECACA;
     font-size: 0.95rem;
-    display: none; /* Oculto por defecto */
+    display: none;
     animation: slideDown 0.3s ease-out;
 }
 
@@ -176,7 +170,6 @@ h5::after {
     line-height: 1.4;
 }
 
-/* Animación para el contenedor de errores */
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -188,7 +181,6 @@ h5::after {
     }
 }
 
-/* Botón de registro */
 .btn-primary {
     background: linear-gradient(180deg, #2563EB 0%, #3389FF 100%);
     border: none;
@@ -213,7 +205,6 @@ h5::after {
     background: linear-gradient(180deg, #1E3A8A 0%, #1D4ED8 100%);
 }
 
-/* Enlace de inicio de sesión */
 .small {
     color: #64748B;
     margin-top: 1.5rem;
@@ -235,7 +226,6 @@ h5::after {
     text-decoration: none;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .card-body {
         padding: 1.75rem !important;
@@ -251,7 +241,6 @@ h5::after {
     }
 }
 
-/* Animación de entrada */
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -267,14 +256,12 @@ h5::after {
     animation: slideIn 0.5s ease-out;
 }
 
-/* Placeholder */
 ::placeholder {
     color: #94A3B8;
     font-size: 0.9rem;
     font-weight: 400;
 }
 
-/* Campos requeridos */
 .form-label[for="nombre"]::after,
 .form-label[for="correo"]::after,
 .form-label[for="password"]::after {
@@ -284,7 +271,6 @@ h5::after {
     font-weight: 600;
 }
 
-/* Estilo para el texto de ayuda */
 .form-text {
     color: #64748B;
     font-size: 0.8rem;
@@ -292,7 +278,6 @@ h5::after {
     text-align: left;
 }
 
-/* Estilos para los mensajes de validación en tiempo real */
 .campo-error-mensaje {
     font-size: 0.85rem;
     margin-top: 5px;
@@ -314,7 +299,6 @@ h5::after {
     }
 }
 
-/* Estilo para los campos con error */
 .is-invalid {
     border-color: #DC2626 !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23DC2626'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23DC2626' stroke='none'/%3e%3c/svg%3e");
@@ -325,7 +309,6 @@ h5::after {
     background-color: #fff8f8 !important;
 }
 
-/* Estilo para los campos válidos */
 .is-valid {
     border-color: #059669 !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23059669' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -336,7 +319,6 @@ h5::after {
     background-color: #f8fff8 !important;
 }
 
-/* Contenedor de errores principal */
 #errorContainer {
     display: none;
     margin-bottom: 1.5rem;

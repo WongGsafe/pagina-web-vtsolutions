@@ -6,9 +6,7 @@ body{
   background: linear-gradient(180deg, #2563EB 0%, #3389FF 100%);
 }
 
-/* Mantén tu CSS existente y agrega estos estilos */
 
-/* Estilos específicos para login */
 .login .card {
     border: none;
     border-radius: 1rem !important;
@@ -21,7 +19,6 @@ body{
     box-shadow: 0 15px 50px rgba(37, 99, 235, 0.25);
 }
 
-/* Estilos para mensajes de validación */
 .mensaje-validacion {
     font-size: 0.85rem;
     margin-top: 5px;
@@ -43,7 +40,6 @@ body{
     }
 }
 
-/* Estados de validación para inputs */
 .is-invalid {
     border-color: #DC2626 !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23DC2626'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23DC2626' stroke='none'/%3e%3c/svg%3e");
@@ -64,7 +60,6 @@ body{
     background-color: #f8fff8 !important;
 }
 
-/* Botón de login */
 .btn-primary {
     background: linear-gradient(180deg, #2563EB 0%, #3389FF 100%);
     border: none;
@@ -84,7 +79,6 @@ body{
     box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
 }
 
-/* Enlaces */
 .small a {
     color: #2563EB;
     text-decoration: none;
@@ -97,7 +91,6 @@ body{
     text-decoration: underline;
 }
 
-/* Campos requeridos */
 .form-label::after {
     content: ' *';
     color: #DC2626;
@@ -105,7 +98,6 @@ body{
     font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .login {
         min-height: calc(80vh - 80px) !important;

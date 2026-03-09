@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    // Función para crear mensajes de validación
     function crearMensaje(inputId) {
         const input = document.getElementById(inputId);
         const mensaje = document.createElement('div');
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return mensaje;
     }
 
-    // Crear mensajes para cada campo
     const mensajes = {
         nombre: crearMensaje('nombre'),
         correo: crearMensaje('correo'),
@@ -24,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         confirm: crearMensaje('confirmPassword')
     };
 
-    // Validaciones en tiempo real
     document.getElementById('nombre').addEventListener('input', function() {
         validarCampo('nombre', [
             { condicion: this.value.trim().length < 3, mensaje: '❌ Mínimo 3 caracteres' },
@@ -45,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
             { condicion: !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(this.value), mensaje: '❌ Debe tener mayúscula, minúscula y número' }
         ], '✅ Contraseña segura');
         
-        // Si hay algo en confirmación, validarlo también
         if (document.getElementById('confirmPassword').value) {
             validarConfirmacion();
         }
@@ -53,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('confirmPassword').addEventListener('input', validarConfirmacion);
 
-    // Función específica para validar confirmación
     function validarConfirmacion() {
         const password = document.getElementById('password').value;
         const confirm = document.getElementById('confirmPassword').value;
@@ -65,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Verificar si la contraseña es válida primero
         const passwordValida = password.length >= 6 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password);
         
         if (!passwordValida) {
@@ -89,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Función genérica de validación para otros campos
     function validarCampo(campoId, reglas, mensajeExito) {
         const input = document.getElementById(campoId);
         const valor = campoId === 'nombre' || campoId === 'correo' ? input.value.trim() : input.value;
@@ -119,17 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
         mensajeDiv.style.color = '#28a745';
     }
 
-    // Validación al enviar
     registroForm.addEventListener('submit', function(event) {
         event.preventDefault();
         
-        // Forzar validaciones
         document.getElementById('nombre').dispatchEvent(new Event('input'));
         document.getElementById('correo').dispatchEvent(new Event('input'));
         document.getElementById('password').dispatchEvent(new Event('input'));
-        validarConfirmacion(); // Llamar directamente a la función de confirmación
+        validarConfirmacion(); 
         
-        // Verificar si todo es válido
         const nombre = document.getElementById('nombre').value.trim();
         const correo = document.getElementById('correo').value.trim();
         const password = document.getElementById('password').value;
