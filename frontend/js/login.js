@@ -1,36 +1,45 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.querySelector('form');
-    
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+
     if (!loginForm) {
-        console.error('No se encontró el formulario');
+        console.error('No se encontró el formulario de login');
         return;
     }
 
-    // Usuario quemado
-    const usuarioValido = {
-        correo: 'admin@vt.com',
-        password: 'Admin123'
-    };
-
-    loginForm.addEventListener('submit', function(event) {
+    loginForm.addEventListener('submit', async function (event) {
         event.preventDefault();
-        
-        const email = document.querySelector('input[type="email"]').value.trim();
-        const password = document.querySelector('input[type="password"]').value;
-        
-        // Validación simple
-        if (email === '' || password === '') {
-            alert('❌ Todos los campos son obligatorios');
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (!email || !password) {
+            alert('Todos los campos son obligatorios');
             return;
         }
-        
-        // Verificar credenciales
-        if (email === usuarioValido.correo && password === usuarioValido.password) {
-            alert('✅ ¡Bienvenido!');
-            // Redirigir a la página principal
-            window.location.href = 'principal.html';
-        } else {
-            alert('❌ Correo o contraseña incorrectos');
+
+        try {
+            const respuesta = await fetch('http://localhost:4000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await respuesta.json();
+
+            if (!respuesta.ok) {
+                alert(data.message || 'Error al iniciar sesión');
+                return;
+            }
+
+            localStorage.setItem('usuario', JSON.stringify(data.data));
+            alert('Inicio de sesión correcto');
+            window.location.href = 'catalogo.html';
+
+        } catch (error) {
+            console.error('Error al iniciar sesión:', error);
+            alert('No se pudo conectar con el servidor');
         }
     });
 });
