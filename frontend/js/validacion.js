@@ -1,154 +1,58 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const registroForm = document.getElementById('registroForm');
-    
-    if (!registroForm) {
-        console.error('Formulario no encontrado');
-        return;
-    }
 
-    function crearMensaje(inputId) {
-        const input = document.getElementById(inputId);
-        const mensaje = document.createElement('div');
-        mensaje.className = 'mensaje-validacion';
-        mensaje.style.cssText = 'font-size: 0.85rem; margin-top: 5px; min-height: 20px; display: none;';
-        input.parentNode.appendChild(mensaje);
-        return mensaje;
-    }
+    if (!registroForm) return;
 
-    const mensajes = {
-        nombre: crearMensaje('nombre'),
-        correo: crearMensaje('correo'),
-        password: crearMensaje('password'),
-        confirm: crearMensaje('confirmPassword')
-    };
-
-    document.getElementById('nombre').addEventListener('input', function() {
-        validarCampo('nombre', [
-            { condicion: this.value.trim().length < 3, mensaje: '❌ Mínimo 3 caracteres' },
-            { condicion: !/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(this.value.trim()), mensaje: '❌ Solo letras' }
-        ], '✅ Nombre válido');
-    });
-
-    document.getElementById('correo').addEventListener('input', function() {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        validarCampo('correo', [
-            { condicion: !emailRegex.test(this.value.trim()), mensaje: '❌ Correo inválido' }
-        ], '✅ Correo válido');
-    });
-
-    document.getElementById('password').addEventListener('input', function() {
-        validarCampo('password', [
-            { condicion: this.value.length < 6, mensaje: '❌ Mínimo 6 caracteres' },
-            { condicion: !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(this.value), mensaje: '❌ Debe tener mayúscula, minúscula y número' }
-        ], '✅ Contraseña segura');
-        
-        if (document.getElementById('confirmPassword').value) {
-            validarConfirmacion();
-        }
-    });
-
-    document.getElementById('confirmPassword').addEventListener('input', validarConfirmacion);
-
-    function validarConfirmacion() {
-        const password = document.getElementById('password').value;
-        const confirm = document.getElementById('confirmPassword').value;
-        const mensajeDiv = mensajes.confirm;
-        
-        if (confirm === '') {
-            document.getElementById('confirmPassword').classList.remove('is-invalid', 'is-valid');
-            mensajeDiv.style.display = 'none';
-            return;
-        }
-        
-        const passwordValida = password.length >= 6 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password);
-        
-        if (!passwordValida) {
-            document.getElementById('confirmPassword').classList.add('is-invalid');
-            document.getElementById('confirmPassword').classList.remove('is-valid');
-            mensajeDiv.style.display = 'block';
-            mensajeDiv.innerHTML = '❌ Primero ingresa una contraseña válida';
-            mensajeDiv.style.color = '#dc3545';
-        } else if (confirm !== password) {
-            document.getElementById('confirmPassword').classList.add('is-invalid');
-            document.getElementById('confirmPassword').classList.remove('is-valid');
-            mensajeDiv.style.display = 'block';
-            mensajeDiv.innerHTML = '❌ Las contraseñas no coinciden';
-            mensajeDiv.style.color = '#dc3545';
-        } else {
-            document.getElementById('confirmPassword').classList.add('is-valid');
-            document.getElementById('confirmPassword').classList.remove('is-invalid');
-            mensajeDiv.style.display = 'block';
-            mensajeDiv.innerHTML = '✅ Las contraseñas coinciden';
-            mensajeDiv.style.color = '#28a745';
-        }
-    }
-
-    function validarCampo(campoId, reglas, mensajeExito) {
-        const input = document.getElementById(campoId);
-        const valor = campoId === 'nombre' || campoId === 'correo' ? input.value.trim() : input.value;
-        const mensajeDiv = mensajes[campoId];
-        
-        if (valor === '') {
-            input.classList.remove('is-invalid', 'is-valid');
-            mensajeDiv.style.display = 'none';
-            return;
-        }
-        
-        for (let regla of reglas) {
-            if (regla.condicion) {
-                input.classList.add('is-invalid');
-                input.classList.remove('is-valid');
-                mensajeDiv.style.display = 'block';
-                mensajeDiv.innerHTML = regla.mensaje;
-                mensajeDiv.style.color = '#dc3545';
-                return;
-            }
-        }
-        
-        input.classList.add('is-valid');
-        input.classList.remove('is-invalid');
-        mensajeDiv.style.display = 'block';
-        mensajeDiv.innerHTML = mensajeExito;
-        mensajeDiv.style.color = '#28a745';
-    }
-
-    registroForm.addEventListener('submit', function(event) {
+    registroForm.addEventListener('submit', async function (event) {
         event.preventDefault();
-        
-        document.getElementById('nombre').dispatchEvent(new Event('input'));
-        document.getElementById('correo').dispatchEvent(new Event('input'));
-        document.getElementById('password').dispatchEvent(new Event('input'));
-        validarConfirmacion(); 
-        
+
         const nombre = document.getElementById('nombre').value.trim();
         const correo = document.getElementById('correo').value.trim();
-        const password = document.getElementById('password').value;
-        const confirm = document.getElementById('confirmPassword').value;
-        
-        const nombreValido = nombre.length >= 3 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nombre);
-        const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
-        const passwordValido = password.length >= 6 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password);
-        const confirmValido = password === confirm && passwordValido;
-        
-        if (nombreValido && correoValido && passwordValido && confirmValido) {
-            alert('✅ ¡Registro exitoso!');
-            registroForm.reset();
-            ['nombre', 'correo', 'password', 'confirmPassword'].forEach(id => {
-                document.getElementById(id).classList.remove('is-invalid', 'is-valid');
-                if (id === 'confirmPassword') {
-                    mensajes.confirm.style.display = 'none';
-                } else {
-                    mensajes[id].style.display = 'none';
-                }
+        const password = document.getElementById('password').value.trim();
+        const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+        if (!nombre || !correo || !password || !confirmPassword) {
+            alert('Todos los campos son obligatorios');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('La contraseña debe tener al menos 6 caracteres');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert('Las contraseñas no coinciden');
+            return;
+        }
+
+        try {
+            const respuesta = await fetch('http://localhost:4000/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: nombre,
+                    email: correo,
+                    password: password
+                })
             });
-            setTimeout(() => window.location.href = 'Login.html', 1500);
-        } else {
-            let errores = [];
-            if (!nombreValido) errores.push('• Nombre inválido (mínimo 3 letras)');
-            if (!correoValido) errores.push('• Correo inválido');
-            if (!passwordValido) errores.push('• Contraseña inválida (mínimo 6, mayúscula, minúscula, número)');
-            if (!confirmValido) errores.push('• Las contraseñas no coinciden');
-            alert('❌ Errores:\n' + errores.join('\n'));
+
+            const data = await respuesta.json();
+
+            if (!respuesta.ok) {
+                alert(data.message || 'No se pudo registrar el usuario');
+                return;
+            }
+
+            alert('Usuario registrado correctamente');
+            registroForm.reset();
+            window.location.href = 'Login.html';
+
+        } catch (error) {
+            console.error('Error en registro:', error);
+            alert('No se pudo conectar con el servidor');
         }
     });
 });
