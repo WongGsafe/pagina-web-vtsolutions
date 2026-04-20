@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   let cartTotal = 0;
   let rates     = null;
 
-  // ── Cargar tasas de cambio ────────────────────────────────────────────────
+  // Cargar tasas de cambio
   async function loadRates() {
     try {
       const data = await apiFetch('/external/rates');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       </div>`;
   }
 
-  // ── Cargar resumen del carrito ────────────────────────────────────────────
+  // Cargar resumen del carrito
   try {
     const cart  = await apiFetch(`/cart/${userId}`);
     const items = cart.items || [];

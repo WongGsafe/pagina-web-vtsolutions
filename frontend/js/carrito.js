@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                    onerror="this.src='https://picsum.photos/seed/${p._id}/60/60'">
               <div>
                 <div class="fw-semibold">${p.name}</div>
-                <button class="btn btn-link btn-sm text-danger p-0" onclick="removeItem('${p._id}')">Eliminar</button>
+                <button onclick="removeItem('${p._id}')">Eliminar</button>
               </div>
             </div>
           </td>
