@@ -9,8 +9,36 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('carrito', JSON.stringify(carrito));
     }
 
+<<<<<<< HEAD
     function renderCarrito() {
         if (!carritoBody) return;
+=======
+    tbody.innerHTML = items.map(item => {
+      const p   = item.product;
+      const sub = (p.price * item.quantity).toFixed(2);
+      return `
+        <tr>
+          <td>
+            <div class="d-flex gap-3 align-items-center">
+              <img src="${p.image || `https://picsum.photos/seed/${p._id}/60/60`}"
+                   width="50" height="50" style="object-fit:cover;border-radius:8px;"
+                   onerror="this.src='https://picsum.photos/seed/${p._id}/60/60'">
+              <div>
+                <div class="fw-semibold">${p.name}</div>
+                <button "onclick="removeItem('${p._id}')">Eliminar</button>
+              </div>
+            </div>
+          </td>
+          <td class="text-center">
+            <input type="number" class="form-control form-control-sm text-center qty-input"
+                   value="${item.quantity}" min="1" style="width:70px;margin:auto;"
+                   data-pid="${p._id}" onchange="updateQty('${p._id}', this.value)">
+          </td>
+          <td class="text-end">$${parseFloat(p.price).toFixed(2)}</td>
+          <td class="text-end fw-semibold">$${sub}</td>
+        </tr>`;
+    }).join('');
+>>>>>>> 6247164 (Avance final - Programación Web Avanzada)
 
         if (carrito.length === 0) {
             carritoBody.innerHTML = `
