@@ -1,18 +1,37 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const carritoBody = document.getElementById('carritoBody');
-    const subtotalEl = document.getElementById('subtotal');
-    const totalEl = document.getElementById('total');
+document.addEventListener('DOMContentLoaded', async function () {
+  const tbody    = document.getElementById('cart-tbody');
+  const summary  = document.getElementById('cart-summary');
+  const countEl  = document.getElementById('cart-count');
+  const totalEl  = document.getElementById('cart-total');
+  const checkBtn = document.getElementById('checkout-btn');
 
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const userId = Auth.userId();
+  if (!userId) {
+    tbody.innerHTML = '<tr><td colspan="4" class="text-center py-3">Debes <a href="Login.html">iniciar sesión</a> para ver tu carrito.</td></tr>';
+    return;
+  }
 
-    function guardarCarrito() {
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+  async function loadCart() {
+    tbody.innerHTML = '<tr><td colspan="4" class="text-center"><div class="spinner-border spinner-border-sm text-primary"></div></td></tr>';
+    try {
+      const cart = await apiFetch(`/cart/${userId}`);
+      renderCart(cart);
+    } catch (err) {
+      tbody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">${err.message}</td></tr>`;
+    }
+  }
+
+  function renderCart(cart) {
+    const items = cart.items || [];
+    if (!items.length) {
+      tbody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-muted">Tu carrito está vacío.</td></tr>';
+      if (countEl) countEl.textContent = '0 artículos';
+      if (totalEl) totalEl.textContent = '$0.00';
+      if (checkBtn) checkBtn.classList.add('disabled');
+      renderSummary([]);
+      return;
     }
 
-<<<<<<< HEAD
-    function renderCarrito() {
-        if (!carritoBody) return;
-=======
     tbody.innerHTML = items.map(item => {
       const p   = item.product;
       const sub = (p.price * item.quantity).toFixed(2);
@@ -38,74 +57,45 @@ document.addEventListener('DOMContentLoaded', () => {
           <td class="text-end fw-semibold">$${sub}</td>
         </tr>`;
     }).join('');
->>>>>>> 6247164 (Avance final - Programación Web Avanzada)
 
-        if (carrito.length === 0) {
-            carritoBody.innerHTML = `
-                <tr>
-                    <td colspan="4" class="text-center">Tu carrito está vacío</td>
-                </tr>
-            `;
-            subtotalEl.textContent = '0.00';
-            totalEl.textContent = '0.00';
-            return;
-        }
+    const total = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
+    if (countEl) countEl.textContent = `${items.length} artículo${items.length !== 1 ? 's' : ''}`;
+    if (totalEl) totalEl.textContent = `$${total.toFixed(2)}`;
+    if (checkBtn) checkBtn.classList.remove('disabled');
+    renderSummary(items);
+  }
 
-        carritoBody.innerHTML = carrito.map((producto, index) => `
-            <tr>
-                <td>
-                    <div class="d-flex align-items-center gap-3">
-                        <img src="${producto.image}" alt="${producto.name}" width="70" height="70" style="object-fit: cover;">
-                        <span>${producto.name}</span>
-                    </div>
-                </td>
-                <td>$${producto.price}</td>
-                <td>
-                    <input 
-                        type="number" 
-                        min="1" 
-                        value="${producto.quantity}" 
-                        data-index="${index}" 
-                        class="form-control cantidad-input"
-                        style="width: 90px;">
-                </td>
-                <td>
-                    <button class="btn btn-danger btn-sm eliminar-btn" data-index="${index}">Eliminar</button>
-                </td>
-            </tr>
-        `).join('');
+  function renderSummary(items) {
+    if (!summary) return;
+    const rows = items.map(i =>
+      `<li class="list-group-item d-flex justify-content-between px-0">
+        <span class="text-body-secondary">${i.product.name}</span>
+        <span>$${(i.product.price * i.quantity).toFixed(2)}</span>
+      </li>`).join('');
+    const total = items.reduce((s, i) => s + i.product.price * i.quantity, 0);
+    summary.innerHTML = `
+      ${rows}
+      <li class="list-group-item d-flex justify-content-between px-0 fw-semibold">
+        <span>Total</span><span>$${total.toFixed(2)}</span>
+      </li>`;
+  }
 
-        const subtotal = carrito.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  window.removeItem = async function (productId) {
+    try {
+      await apiFetch(`/cart/${userId}/item/${productId}`, { method: 'DELETE' });
+      loadCart();
+    } catch (err) { alert(err.message); }
+  };
 
-        subtotalEl.textContent = subtotal.toFixed(2);
-        totalEl.textContent = subtotal.toFixed(2);
+  window.updateQty = async function (productId, quantity) {
+    try {
+      await apiFetch(`/cart/${userId}/item/${productId}`, {
+        method: 'PUT',
+        body: JSON.stringify({ quantity: parseInt(quantity) })
+      });
+      loadCart();
+    } catch (err) { alert(err.message); }
+  };
 
-        document.querySelectorAll('.cantidad-input').forEach(input => {
-            input.addEventListener('change', (e) => {
-                const index = Number(e.target.dataset.index);
-                const nuevaCantidad = Number(e.target.value);
-
-                if (nuevaCantidad < 1) {
-                    e.target.value = 1;
-                    carrito[index].quantity = 1;
-                } else {
-                    carrito[index].quantity = nuevaCantidad;
-                }
-
-                guardarCarrito();
-                renderCarrito();
-            });
-        });
-
-        document.querySelectorAll('.eliminar-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const index = Number(e.target.dataset.index);
-                carrito.splice(index, 1);
-                guardarCarrito();
-                renderCarrito();
-            });
-        });
-    }
-
-    renderCarrito();
+  await loadCart();
 });
